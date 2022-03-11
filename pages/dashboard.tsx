@@ -7,13 +7,13 @@ import { withSSRAuth } from "../utils/withSSRAuth";
 
 export default function Dashboard() {
 
-  const { user, signOut, isAuthenticated } = useContext(AuthContext);
+  const { user, signOut } = useContext(AuthContext);
 
-  useEffect(() => {
-    api.get('/me')
-      .then(response => console.log(response))
-      .catch(err => console.log(err));
-  })
+  // useEffect(() => {
+  //   api.get('/me')
+  //     .then(response => console.log(response))
+  //     .catch(err => console.log(err));
+  // })
 
   return (
     <>
@@ -28,11 +28,7 @@ export default function Dashboard() {
   )
 }
 
-export const getServerSideProps = withSSRAuth(async (ctx) => {
-  const apiClient = setupAPIClient(ctx);
-  const response = await apiClient.get('/me');
-  console.log(response.data);
-
+export const getServerSideProps = withSSRAuth(async () => {
   return {
     props: {}
   }
